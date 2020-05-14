@@ -2,7 +2,13 @@
 <h4 align = "right">Colby T. Ford, Ph.D.</h4>
 This repository contains the Dockerfile for generating an Ubuntu image with SeekDeep pre-installed.
 
-## Instructions
+## DockerHub
+This container image is available from DockerHub.
+```
+docker pull cford38/seekdeep
+``` 
+
+## Build Instructions
 1. Clone this repository to your local machine
 
 2. Open terminal and navigate to the directory of this repository.
@@ -18,6 +24,14 @@ _Note:_ You may have to increase the resource limits in Docker's settings as thi
 4. Once the image has been created successfully, run the container using the following command.
 ```
 docker run seekdeep
+```
+----------------------
+
+## To Publish on DockerHub
+
+```
+docker image tag seekdeep <USERNAME>/seekdeep
+docker push <USERNAME>/seekdeep
 ```
 
 ----------------------
