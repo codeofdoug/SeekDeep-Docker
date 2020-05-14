@@ -25,6 +25,13 @@ _Note:_ You may have to increase the resource limits in Docker's settings as thi
 ```
 docker run seekdeep
 ```
+
+5. Once the container is ready, remote into the bash terminal.
+```
+docker run --name seekdeep -d seekdeep
+docker exec -it seekdeep /bin/bash
+```
+
 ----------------------
 
 ## To Publish on DockerHub
