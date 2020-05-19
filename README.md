@@ -3,7 +3,8 @@
 This repository contains the Dockerfile for generating an Ubuntu image with SeekDeep pre-installed.
 
 ## DockerHub
-This container image is available from DockerHub.
+This container image is available from DockerHub: [hub.docker.com/r/cford38/seekdeep](https://hub.docker.com/r/cford38/seekdeep)
+
 #### Pull Image to Local Machine
 ```
 docker pull cford38/seekdeep:latest
