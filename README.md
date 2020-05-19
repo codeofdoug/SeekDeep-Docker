@@ -55,5 +55,6 @@ docker push <USERNAME>/seekdeep
 ```
 
 ----------------------
-SeekDeep is a suite of bioinformatics tools for analyzing targeted amplicon sequencing developed by the UMass Medicine Bailey Lab. Check out their website below for more details:  
-[http://seekdeep.brown.edu/](http://seekdeep.brown.edu/)
+## About SeekDeep
+
+SeekDeep, developed by the Bailey Lab at Brown University, is a suite of bioinformatics tools for analyzing targeted amplicon sequencing. Check out their website for more details: [http://seekdeep.brown.edu/](http://seekdeep.brown.edu/)
