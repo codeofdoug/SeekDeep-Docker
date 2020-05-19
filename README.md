@@ -4,9 +4,21 @@ This repository contains the Dockerfile for generating an Ubuntu image with Seek
 
 ## DockerHub
 This container image is available from DockerHub.
+#### Pull Image to Local Machine
 ```
-docker pull cford38/seekdeep
-``` 
+docker pull cford38/seekdeep:latest
+```
+#### To Run Locally
+```
+docker run --name seekdeep -d cford38/seekdeep
+docker exec -it seekdeep /bin/bash
+```
+
+#### Copy File to Container
+```
+docker cp myfile.txt seekdeep:./myfile.txt
+```
+-------------------------------
 
 ## Build Instructions
 1. Clone this repository to your local machine
@@ -42,5 +54,5 @@ docker push <USERNAME>/seekdeep
 ```
 
 ----------------------
-SeekDeep is a suite of bioinformatics tools for analyzing targeted amplicon sequencing developed by the UMass Medicine Bailey Lab. Checkout their website bellow for more details:  
+SeekDeep is a suite of bioinformatics tools for analyzing targeted amplicon sequencing developed by the UMass Medicine Bailey Lab. Check out their website below for more details:  
 [http://seekdeep.brown.edu/](http://seekdeep.brown.edu/)
