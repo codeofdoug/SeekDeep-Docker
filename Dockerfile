@@ -49,29 +49,6 @@ RUN apt-get update && \
   apt-get install -y apache2 apache2-utils && \
   a2enmod proxy && a2enmod proxy_http
   
-# # add all the files necessary files from the files directory for misc operations
-# ADD /files/ /
-
-# #
-# # link seek into /usr/bin
-# #
-# RUN ln -s /root/SeekDeepHome/SeekDeep/bin/SeekDeep /usr/bin/
-
-# #
-# # Make necessary scripts executable 
-# #
-
-# RUN chmod 755 /etc/rc.local /root/installSeekDeep.sh /root/copyfs.sh
-
-# # enable sshd
-# RUN /bin/rm /etc/service/sshd/down
-
-# # Use baseimage-docker's init system.
-# CMD ["/sbin/my_init"]
-
-
-# # public exposed ports
-# EXPOSE 8000 22
 
 # install SeekDeep from git repo
 RUN cd ~ && \
@@ -89,3 +66,18 @@ RUN cd ~ && \
   export PATH=/root/SeekDeep/bin/:$PATH && \
   ln -s /root/SeekDeep/bin/SeekDeep /usr/bin/
 # export PATH=/home/user/SeekDeep/bin/:$PATH
+
+# install conda and dependencies
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+
+RUN conda install --yes -c bioconda \
+		bowtie2 \
+		samtools \
+		nomkl
