@@ -1,5 +1,5 @@
-# PairedEnd_noMIDs Tutorial
-<p align="right">Source: https://seekdeep.brown.edu/tutorial_PairedEnd_noMIDs.html</p>
+# Paired End no MIDs/Barcodes Tutorial
+<p align="right"><b>Source:</b> https://seekdeep.brown.edu/tutorial_PairedEnd_noMIDs.html</p>
 
 ## Get sample file (no replicates)
 ```
