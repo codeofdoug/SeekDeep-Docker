@@ -30,7 +30,7 @@ docker cp myfile.txt seekdeep:./myfile.txt
 ```
 docker build -t seekdeep .
 ```
-_Note:_ You may have to increase the resource limits in Docker's settings as this container size will be quite large.
+_Note:_ You may have to increase the resource limits in Docker's settings as this container size (and the resources SeekDeep needs to run) will be quite large.
 <p align="center"><img src="DockerSettings.PNG" width="500px"></p>
 
 
