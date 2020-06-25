@@ -82,5 +82,5 @@ RUN conda install --yes -c bioconda \
 		samtools \
 		nomkl
 
-# Export Port to Public
-EXPOSE 8000 22
+# Export Ports to Public
+EXPOSE 8000 9881 22
