@@ -81,3 +81,6 @@ RUN conda install --yes -c bioconda \
 		bowtie2 \
 		samtools \
 		nomkl
+
+# Export Port to Public
+EXPOSE 8000 22
