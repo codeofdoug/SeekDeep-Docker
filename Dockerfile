@@ -13,7 +13,7 @@ ENV HOME=/root TERM=xterm
 # set proper timezone
 RUN echo America/New_York > /etc/timezone && sudo dpkg-reconfigure --frontend noninteractive tzdata
 
-# Install essential for building   
+# Install essential for building
 RUN \
   apt-get update && \
   apt-get dist-upgrade -y && \
