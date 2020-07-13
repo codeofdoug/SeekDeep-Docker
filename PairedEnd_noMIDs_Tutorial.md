@@ -37,7 +37,10 @@ cd analysis
 ## Start data viewer
 ```bash
 ./startServerCmd.sh 
+```
 
+## Use Pipeline Wrapper
+```
 cd ..
 
 SeekDeep setupTarAmpAnalysis --samples sampleNames.tab.txt --outDir analysis_output --inputDir fastq/ --idFile ids.tab.txt --overlapStatusFnp overlapStatuses.txt --lenCutOffs lenCutOffs.txt "--extraExtractorCmds=--checkRevComplementForPrimers" --groupMeta metaData.tab.txt
