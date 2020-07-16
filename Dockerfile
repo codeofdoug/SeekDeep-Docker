@@ -49,6 +49,12 @@ RUN apt-get update && \
   apt-get install -y apache2 apache2-utils && \
   a2enmod proxy && a2enmod proxy_http
   
+# install RDP
+# RUN sudo apt-get update && \
+#     sudo apt-get -y install xfce4 xrdp && \
+#     sudo systemctl enable xrdp && \
+#     echo xfce4-session >~/.xsession && \
+#     sudo service xrdp restart
 
 # install SeekDeep from git repo
 RUN cd ~ && \
@@ -83,4 +89,4 @@ RUN conda install --yes -c bioconda \
 		nomkl
 
 # Export Ports to Public
-EXPOSE 8000 9881 22
+EXPOSE 8000 9881 22 3389
