@@ -19,6 +19,12 @@ docker exec -it seekdeep /bin/bash
 ```
 docker cp myfile.txt seekdeep:./myfile.txt
 ```
+
+### Copy Files from Container
+```
+docker cp seekdeep:./root/SeekDeep/ ./
+```
+
 -------------------------------
 
 ## Build Instructions
