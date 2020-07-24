@@ -48,13 +48,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g-dev libcairo2-dev l
 RUN apt-get update && \
   apt-get install -y apache2 apache2-utils && \
   a2enmod proxy && a2enmod proxy_http
-  
-# install RDP
-# RUN sudo apt-get update && \
-#     sudo apt-get -y install xfce4 xrdp && \
-#     sudo systemctl enable xrdp && \
-#     echo xfce4-session >~/.xsession && \
-#     sudo service xrdp restart
 
 # install SeekDeep from git repo
 RUN cd ~ && \
