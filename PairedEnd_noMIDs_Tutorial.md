@@ -45,3 +45,5 @@ cd ..
 
 SeekDeep setupTarAmpAnalysis --samples sampleNames.tab.txt --outDir analysis_output --inputDir fastq/ --idFile ids.tab.txt --overlapStatusFnp overlapStatuses.txt --lenCutOffs lenCutOffs.txt "--extraExtractorCmds=--checkRevComplementForPrimers" --groupMeta metaData.tab.txt
 ```
+
+Results are in the `SeekDeep/CamThaiGhanaDRC_2011_2013_drugRes_withRevComp/analysis/popClustering/` folder where each directory is a gene. (e.g. `PfAMA1-129-279/analysis/selectedClustersInfo.tab.txt`)
