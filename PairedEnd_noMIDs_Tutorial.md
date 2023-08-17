@@ -39,7 +39,8 @@ cd analysis
 ## ./startServerCmd.sh 9881 pcv
 SeekDeep popClusteringViewer --verbose --configDir "$(pwd)/serverConfigs" --bindAddress 0.0.0.0 --port 9881 --name pcv
 ```
-Then, navigate to localhost on your
+Then, navigate to [localhost](http://localhost:9881/pcv) on your local browser. You should then be able to see the viewer tool.
+![](viewer.png)
 
 ## Use Pipeline Wrapper
 ```
