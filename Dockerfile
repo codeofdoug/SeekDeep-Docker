@@ -47,4 +47,5 @@ RUN sudo apt install -y \
     samtools
 
 ## Expose Ports
-EXPOSE 8000 9881 22 3389
+EXPOSE 9881
+# 8000 22 3389
