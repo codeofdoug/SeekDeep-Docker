@@ -29,15 +29,17 @@ SeekDeep setupTarAmpAnalysis --samples sampleNames.tab.txt --outDir analysis --i
 cd analysis
 ```
 
-## Run analysis with whatever number of CPUs you want to use (below is 4)
+## Run analysis with whatever number of CPUs you want to use (below is 8)
 ```bash
-./runAnalysis.sh 4
+./runAnalysis.sh 8
 ```
 
 ## Start data viewer
 ```bash
-./startServerCmd.sh 
+## ./startServerCmd.sh 9881 pcv
+SeekDeep popClusteringViewer --verbose --configDir "$(pwd)/serverConfigs" --bindAddress 0.0.0.0 --port 9881 --name pcv
 ```
+Then, navigate to localhost on your
 
 ## Use Pipeline Wrapper
 ```
