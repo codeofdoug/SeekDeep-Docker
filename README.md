@@ -42,7 +42,7 @@ _Note:_ You may have to increase the resource limits in Docker's settings as thi
 
 4. Once the image has been created successfully, run the container using the following command.
 ```bash
-docker run --name seekdeep -it -d seekdeep
+docker run --name seekdeep -it -p 9881:9881 -d seekdeep
 ```
 
 5. Once the container is ready, remote into the bash terminal.
