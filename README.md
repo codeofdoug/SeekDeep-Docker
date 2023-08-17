@@ -11,7 +11,7 @@ docker pull cford38/seekdeep:latest
 ```
 #### To Run Locally
 ```bash
-docker run --name seekdeep -d cford38/seekdeep
+docker run --name seekdeep -p 9881:9881 -d cford38/seekdeep
 docker exec -it seekdeep /bin/bash
 ```
 
@@ -49,6 +49,15 @@ docker run --name seekdeep -it -p 9881:9881 -d seekdeep
 ```bash
 docker exec -it seekdeep /bin/bash
 ```
+
+Note, from the terminal (and after you've completed your analysis), you can run the `popClusteringViewer` to browse through your results.
+
+```bash
+SeekDeep popClusteringViewer --verbose --configDir "$(pwd)/serverConfigs" --bindAddress 0.0.0.0 --port 9881 --name pcv
+```
+
+Then, navigate to [localhost](http://localhost:9881/pcv) on your local browser. You should then be able to see the viewer tool.
+![](viewer.png)
 
 ----------------------
 
