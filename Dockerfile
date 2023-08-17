@@ -1,85 +1,50 @@
-# Use phusion/baseimage as base image. To make your builds reproducible, make
-# sure you lock down to a specific version, not to `latest`!
-# See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
-# a list of version numbers.
+FROM python:3.9-bullseye
 
-FROM phusion/baseimage:0.9.16
-
-MAINTAINER Colby T. Ford <colby.ford@uncc.edu>
-
-# global env
-ENV HOME=/root TERM=xterm
-
-# set proper timezone
-RUN echo America/New_York > /etc/timezone && sudo dpkg-reconfigure --frontend noninteractive tzdata
-
-# Install essential for building
-RUN \
-  apt-get update && \
-  apt-get dist-upgrade -y && \
-  apt-get -y autoremove && \
-  apt-get install -y build-essential software-properties-common && \
-  apt-get install -y git make
-
-# install generic stuff for downloading other libraries 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git cmake wget
-
-# install clang and g++-7 
-RUN echo "deb http://llvm.org/apt/"$(lsb_release -sc)"/ llvm-toolchain-"$(lsb_release -sc)"-3.8 main" | sudo tee /etc/apt/sources.list.d/llvm.list && \ 
-	echo "deb-src http://llvm.org/apt/"$(lsb_release -sc)"/ llvm-toolchain-"$(lsb_release -sc)"-3.8 main" | sudo tee -a /etc/apt/sources.list.d/llvm.list && \
-	echo "deb http://llvm.org/apt/"$(lsb_release -sc)"/ llvm-toolchain-"$(lsb_release -sc)" main" | sudo tee -a /etc/apt/sources.list.d/llvm.list && \
-	echo "deb-src http://llvm.org/apt/"$(lsb_release -sc)"/ llvm-toolchain-"$(lsb_release -sc)" main" | sudo tee -a /etc/apt/sources.list.d/llvm.list
-
-RUN sudo add-apt-repository ppa:ubuntu-toolchain-r/test && \
-	wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key |sudo apt-key add - && \
-    sudo apt-get autoclean && \
-    sudo apt-get autoremove && \
-	sudo apt-get update && \
-    sudo apt-get install -y clang-3.8 libc++-dev g++-7
-# sudo apt-get install -y clang-3.8 libc++-dev g++-7
-
-
-RUN ln -s /usr/bin/clang-3.8 /usr/bin/clang && ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
-
-# install some generic stuff needed by other libraries 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g-dev libcairo2-dev libpango1.0-dev libcurl4-openssl-dev doxygen graphviz libbz2-dev libjpeg-dev libatlas-base-dev gfortran fort77 libreadline6-dev emacs23-nox
-
-#install apache2
+## Install sudo
 RUN apt-get update && \
-  apt-get install -y apache2 apache2-utils && \
-  a2enmod proxy && a2enmod proxy_http
+    apt-get install -y sudo
 
-# install SeekDeep from git repo
-RUN cd ~ && \
-  git clone https://github.com/bailey-lab/SeekDeep && \
-  cd SeekDeep && \
-  ./setup.py --libs cmake:3.7.2 --symlinkBin && \
-  echo "" >> ~/.profile && echo "#Add SeekDeep bin to your path" >> ~/.profile && echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.profile && \
-  . ~/.profile && \
-  ./setup.py --addBashCompletion && \
-  ./install.sh 7 && \
-  ./setup.py --libs muscle:3.8.31 --symlinkBin --overWrite && \
-  ./configure.py && \
-  ./setup.py --compfile compfile.mk --outMakefile makefile-common.mk --overWrite && \
-  make && \
-  export PATH=/root/SeekDeep/bin/:$PATH && \
-  ln -s /root/SeekDeep/bin/SeekDeep /usr/bin/
-# export PATH=/home/user/SeekDeep/bin/:$PATH
+## Set timezone
+RUN echo America/New_York | sudo tee  /etc/timezone && \
+    sudo dpkg-reconfigure --frontend noninteractive tzdata
+ENV DEBIAN_FRONTEND noninteractive
 
-# install conda and dependencies
-ENV PATH="/root/miniconda3/bin:${PATH}"
-ARG PATH="/root/miniconda3/bin:${PATH}"
+## Install base dependencies
+RUN sudo apt-get update && \
+    sudo apt-get dist-upgrade -y && \
+    sudo apt-get -y autoremove && \
+    sudo apt-get install -y \
+         build-essential \
+         software-properties-common \
+         libcurl4-openssl-dev \
+         git \
+         make \
+         cmake \
+         gcc-9 \
+         g++-9
 
-RUN wget \
-    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && mkdir /root/.conda \
-    && bash Miniconda3-latest-Linux-x86_64.sh -b \
-    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+## Clone GitHub repo
+RUN mkdir -p /app
+WORKDIR /app
+RUN git clone https://github.com/bailey-lab/SeekDeep
+WORKDIR /app/SeekDeep
 
-RUN conda install --yes -c bioconda \
-		bowtie2 \
-		samtools \
-		nomkl
+## Run SeekDeep Setup
+RUN ./setup.py --libs cmake:3.7.2 --symlinkBin
+RUN echo "" >> ~/.profile && echo "#Add SeekDeep bin to your path" >> ~/.profile && echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.profile
+RUN . ~/.profile
+RUN ./setup.py --addBashCompletion
+RUN ./install.sh 7
+RUN export PATH=/app/SeekDeep/bin/:$PATH && \
+    ln -s /app/SeekDeep/bin/SeekDeep /usr/bin/
 
-# Export Ports to Public
+## Add other tools 
+RUN ./setup.py --symlinkBin --overWrite
+
+RUN sudo apt install -y \
+    bowtie2 \
+    muscle \
+    samtools
+
+## Expose Ports
 EXPOSE 8000 9881 22 3389
