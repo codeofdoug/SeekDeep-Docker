@@ -16,4 +16,4 @@ cd analysis
 
 ./runAnalysis.sh 8
 
-nohup SeekDeep popClusteringViewer --verbose --configDir serverConfigs --port 9881
+SeekDeep popClusteringViewer --verbose --configDir "$(pwd)/serverConfigs" --bindAddress 0.0.0.0 --port 9881 --name pcv
