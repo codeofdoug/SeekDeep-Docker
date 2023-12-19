@@ -50,6 +50,10 @@ docker run --name seekdeep -it -p 9881:9881 -d seekdeep
 docker exec -it seekdeep /bin/bash
 ```
 
+6. Run all your settings and finalize it running `runAnalysis` with whatever number of CPUs you want to use (below is 4)
+```bash
+./runAnalysis.sh 4
+```
 Note, from the terminal (and after you've completed your analysis), you can run the `popClusteringViewer` to browse through your results.
 
 ```bash
