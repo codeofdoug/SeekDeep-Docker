@@ -50,7 +50,7 @@ docker run --name seekdeep -it -p 9881:9881 -d seekdeep
 docker exec -it seekdeep /bin/bash
 ```
 
-6. Run all your settings and finalize it running `runAnalysis` with whatever number of CPUs you want to use (below is 4)
+6. Run all your settings and finalize your analysis running `runAnalysis` with whatever number of CPUs you want to use (below is 4)
 ```bash
 ./runAnalysis.sh 4
 ```
