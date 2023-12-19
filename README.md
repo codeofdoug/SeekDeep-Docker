@@ -44,17 +44,22 @@ _Note:_ You may have to increase the resource limits in Docker's settings as thi
 ```bash
 docker run --name seekdeep -it -p 9881:9881 -d seekdeep
 ```
+4. Alternatively, if you want to map access to a specific folder on your computer use the following command.
+```bash
+docker run --name seekdeep -it -p 9881:9881 -v "/your/local/path/to/Folder":/FolderNameInDocker -d seekdeep
+```
 
 5. Once the container is ready, remote into the bash terminal.
 ```bash
 docker exec -it seekdeep /bin/bash
 ```
 
-6. Run all your settings and finalize your analysis running `runAnalysis` with whatever number of CPUs you want to use (below is 4)
+6. Run all your settings and finalize your analysis by running `runAnalysis` with whatever number of CPUs you want to use (below is 4)
 ```bash
 ./runAnalysis.sh 4
 ```
-Note, from the terminal (and after you've completed your analysis), you can run the `popClusteringViewer` to browse through your results.
+
+Note that from the terminal (and after completing your analysis), you can run the `popClusteringViewer` to browse your results.
 
 ```bash
 SeekDeep popClusteringViewer --verbose --configDir "$(pwd)/serverConfigs" --bindAddress 0.0.0.0 --port 9881 --name pcv
